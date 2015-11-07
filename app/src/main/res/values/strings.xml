@@ -1,0 +1,51 @@
+<resources>
+    <string name="app_name">PataRide</string>
+    <string name="action_settings">Settings</string>
+    <string name="title_activity_main">MainActivity</string>
+    <string name="btn_login">Login</string>
+    <string name="btn_signup">Sign Up</string>
+    <string name="btn_signUp">Sign Up</string>
+    <string name="title_activity_login">Sign in</string>
+
+    <!-- Strings related to login -->
+    <string name="prompt_email">Email</string>
+    <string name="prompt_password">Password (optional)</string>
+    <string name="action_sign_in">Sign in or register</string>
+    <string name="action_sign_in_short">Sign in</string>
+    <string name="error_invalid_email">This email address is invalid</string>
+    <string name="error_invalid_password">This password is too short</string>
+    <string name="error_incorrect_password">This password is incorrect</string>
+    <string name="error_field_required">This field is required</string>
+    <string name="permission_rationale">"Contacts permissions are needed for providing email
+        completions."
+    </string>
+    <string name="title_activity_sign_up">Sign_up</string>
+    <string name="tv_name">Name</string>
+    <string name="title_activity_maps">Map</string>
+    <string name="tv_fn">First name</string>
+    <string name="btn_signIn">Sign In</string>
+    <string name="tv_ln">Last name</string>
+    <string name="tv_Name">Name</string>
+    <string name="tv_Name2">Name</string>
+    <string name="tv_pwd">Password</string>
+    <string name="tv_email">Email address</string>
+    <string name="title_activity_pay">Pay</string>
+    <string name="tv_location">Location</string>
+    <string name="tv_dest">Destination</string>
+    <string name="tv_amnt">Amount</string>
+    <string name="btn_send">Send</string>
+    <string name="tv_pay">Paybill number</string>
+    <string name="tv_string">Yaya to City Center is sh.300</string>
+    <string name="radio_btn">m-Pesa</string>
+    <string name="radio_btn2">Credit card</string>
+    <string name="tv_no">00010</string>
+    <string name="tv_ac">Account Name</string>
+    <string name="tv_pr">Pataride</string>
+    <string name="title_activity_thanks">thanks</string>
+    <string name="tv_thanks">Thank you for using Pataride. Driver Jon Doe is on the way to pickyou.</string>
+    <string name="btn1">LOGIN</string>
+    <string name="btn2">SIGN UP</string>
+    <string name="btn3">Request ride</string>
+    <string name="tv_mail">Email</string>
+    <string name="tv_pswd">Password</string>
+</resources>
