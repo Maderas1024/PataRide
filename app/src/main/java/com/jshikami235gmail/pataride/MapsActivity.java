@@ -2,7 +2,6 @@ package com.jshikami235gmail.pataride;
 
 import android.Manifest;
 import android.annotation.TargetApi;
-import android.app.ActionBar;
 import android.app.AlertDialog;
 import android.content.Context;
 import android.content.DialogInterface;
@@ -68,6 +67,19 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
             AlertDialog alert = dialog.create();
             alert.show();
         }
+
+        findViewById(R.id.btn_ride).setOnClickListener(new View.OnClickListener() {
+            public void onClick(View v) {
+                // Perform action on click
+
+                Intent activityChangeIntent;
+                activityChangeIntent = new Intent(MapsActivity.this, Pay.class);
+
+                // currentContext.startActivity(activityChangeIntent);
+
+                MapsActivity.this.startActivity(activityChangeIntent);
+            }
+        });
 
     }
         // Obtain the SupportMapFragment and get notified when the map is ready to be used.*/
@@ -156,21 +168,11 @@ public class MapsActivity extends FragmentActivity implements OnMapReadyCallback
 
         }
 
+
+
+
     @Override
     public void onMapReady(GoogleMap googleMap) {
-        Button btn = (Button) findViewById(R.id.btn_ride);
-        btn.setOnClickListener(new View.OnClickListener() {
-            public void onClick(View v) {
-                // Perform action on click
-
-                Intent activityChangeIntent;
-                activityChangeIntent = new Intent(MapsActivity.this, Pay.class);
-
-                // currentContext.startActivity(activityChangeIntent);
-
-                MapsActivity.this.startActivity(activityChangeIntent);
-            }
-    });
 
     }
 
