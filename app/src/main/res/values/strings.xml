@@ -48,4 +48,8 @@
     <string name="btn3">Request ride</string>
     <string name="tv_mail">Email</string>
     <string name="tv_pswd">Password</string>
+    <string name="tv_mail2">Email</string>
+    <string name="email">Email</string>
+    <string name="signIn">Sign in</string>
+    <string name="sign_In">Sign in</string>
 </resources>

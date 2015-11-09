@@ -1,6 +1,8 @@
 package com.jshikami235gmail.pataride;
 
+import android.annotation.TargetApi;
 import android.content.Intent;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -11,14 +13,14 @@ import android.widget.Button;
 
 public class Sign_up extends AppCompatActivity {
 
+    @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_sign_up);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        ;
-        Button btn = (Button) findViewById(R.id.btn_signIn);
+        android.widget.Toolbar toolbar = (android.widget.Toolbar) findViewById(R.id.toolbar);
+
+        Button btn = (Button) findViewById(R.id.btn_signUp);
         btn.setOnClickListener(new View.OnClickListener() {
             public void onClick(View v) {
                 // Perform action on click
@@ -39,7 +41,7 @@ public class Sign_up extends AppCompatActivity {
                         .setAction("Action", null).show();
             }
         });
-        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
+
     }
 
 }

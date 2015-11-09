@@ -7,17 +7,20 @@
     android:fitsSystemWindows="true"
     tools:context=".MainActivity">
 
-
     <TextView
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceLarge"
-        android:text="Email"
+        android:text="@string/tv_mail2"
         android:id="@+id/textView16"
         android:paddingTop="10dp"
+        android:padding="5dp"
         android:layout_alignParentTop="true"
-        android:layout_toLeftOf="@+id/editText10"
-        android:layout_toStartOf="@+id/editText10" />
+        android:layout_marginTop="40dp"
+        android:layout_alignRight="@+id/editText10"
+        android:layout_alignEnd="@+id/editText10"
+        android:layout_alignLeft="@+id/editText10"
+        android:layout_alignStart="@+id/editText10" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -35,7 +38,8 @@
         android:textAppearance="?android:attr/textAppearanceLarge"
         android:text="Password"
         android:id="@+id/textView17"
-        android:layout_marginTop="63dp"
+        android:padding="5dp"
+        android:layout_marginTop="30dp"
         android:layout_below="@+id/editText10"
         android:layout_alignLeft="@+id/textView16"
         android:layout_alignStart="@+id/textView16" />
@@ -52,7 +56,7 @@
     <Button
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:text="Sign in"
+        android:text="@string/sign_In"
         android:background="#cf4848"
         android:id="@+id/btn_signIn"
         android:layout_below="@+id/editText11"
