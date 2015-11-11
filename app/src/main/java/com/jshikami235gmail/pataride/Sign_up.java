@@ -50,6 +50,34 @@ public class Sign_up extends Activity {
         inputPassword = (EditText) findViewById(R.id.password);
         btn_signUp = (Button) findViewById(R.id.btn_signUp);
 
+
+        boolean isError = false;
+
+        if(inputFirstName.getText().toString().length() <= 0)
+        {
+            inputFirstName.setError("First name required!");
+            isError = true;
+        }
+        if (inputSecondName.getText().toString().length() < 0)
+        {
+            inputSecondName.setError("Last name required!");
+            isError = true;
+        }
+        if (inputEmail.getText().toString().length() == 0)
+        {
+            inputEmail.setError( "Valid email address required!" );
+            isError = true;
+        }
+        if (inputPassword.getText().toString().length() < 8)
+        {
+            inputPassword.setError( "Password required! (Minimum of 8 characters." );
+            isError = true;
+        }
+
+        if(isError){
+            return;
+        }
+
         //Progress dialogue
         pDialog = new ProgressDialog(this);
         pDialog.setCancelable(false);

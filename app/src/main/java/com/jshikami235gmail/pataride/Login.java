@@ -10,7 +10,6 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-
 import com.android.volley.Request;
 import com.android.volley.Response;
 import com.android.volley.VolleyError;
@@ -45,6 +44,7 @@ public class Login extends AppCompatActivity {
 
         // Progress dialog
         pDialog = new ProgressDialog(this);
+        pDialog.setMessage("Logging in ...");
         pDialog.setCancelable(false);
 
         // SQLite database handler
@@ -56,7 +56,7 @@ public class Login extends AppCompatActivity {
         // Check if user is already logged in or not
         if (session.isLoggedIn()) {
             // User is already logged in. Take him to MapsActivity
-            Intent intent = new Intent(Login.this, MapsActivity.class);
+            Intent intent = new Intent(Login.this, Home_screeen.class);
             startActivity(intent);
             finish();
         }
@@ -75,7 +75,7 @@ public class Login extends AppCompatActivity {
                 } else {
                     // Prompt user to enter credentials
                     Toast.makeText(getApplicationContext(),
-                            "Please enter the credentials!", Toast.LENGTH_LONG)
+                            "Please enter required details!", Toast.LENGTH_LONG)
                             .show();
                 }
             }
@@ -92,8 +92,7 @@ public class Login extends AppCompatActivity {
         // Tag used to cancel the request
         String tag_string_req = "req_login";
 
-        pDialog.setMessage("Logging in ...");
-        showDialog();
+
 
         StringRequest strReq = new StringRequest(Request.Method.POST,
                 AppConfig.URL_LOGIN, new Response.Listener<String>() {
@@ -101,7 +100,7 @@ public class Login extends AppCompatActivity {
             @Override
             public void onResponse(String response) {
                 Log.d(TAG, "Login Response: " + response);
-                hideDialog();
+                //hideDialog();
 
                 try {
                     JSONObject jObj = new JSONObject(response);
@@ -116,7 +115,7 @@ public class Login extends AppCompatActivity {
                         // Now store the user in SQLite
                         String uid = jObj.getString("uid");
 
-                        JSONObject user = jObj.getJSONObject("user");
+                        JSONObject user = jObj.getJSONObject("users");
                         String first_name = user.getString("first_name");
                         String second_name = user.getString("second_name");
                         String email = user.getString("email");
@@ -128,7 +127,7 @@ public class Login extends AppCompatActivity {
 
                         // Launch main activity
                         Intent intent = new Intent(Login.this,
-                                MapsActivity.class);
+                                Home_screeen.class);
                         startActivity(intent);
                         finish();
                     } else {
@@ -151,7 +150,7 @@ public class Login extends AppCompatActivity {
                 Log.e(TAG, "Login Error: " + error.getMessage());
                 Toast.makeText(getApplicationContext(),
                         error.getMessage(), Toast.LENGTH_LONG).show();
-                hideDialog();
+                pDialog.dismiss();
             }
         }) {
 
@@ -167,16 +166,10 @@ public class Login extends AppCompatActivity {
 
         };
 
-        // Adding request to request queue
-        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
+
     }
 
-    private void showDialog() {
-        if (!pDialog.isShowing())
-            pDialog.show();
-    }
-
-    private void hideDialog() {
+   private void hideDialog() {
         if (pDialog.isShowing())
             pDialog.dismiss();
     }

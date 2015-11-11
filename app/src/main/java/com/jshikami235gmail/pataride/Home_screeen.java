@@ -46,11 +46,13 @@ public class Home_screeen extends AppCompatActivity {
         // Fetching user details from sqlite
         HashMap<String, String> user = db.getUserDetails();
 
-        String name = user.get("name");
+        String first_name = user.get("first_name");
+        String second_name = user.get("second_name");
         String email = user.get("email");
 
         // Displaying the user details on the screen
-        txtName.setText(name);
+        txtName.setText(first_name);
+        txtName.setText(second_name);
         txtEmail.setText(email);
 
         // Logout button click event
