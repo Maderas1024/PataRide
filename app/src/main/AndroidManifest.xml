@@ -32,7 +32,6 @@
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
         </activity>
-
         <activity
             android:name=".MainActivity"
             android:label="@string/title_activity_main"
@@ -42,7 +41,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.jshikami235gmail.pataride.Splash_screen" />
         </activity>
-
         <activity
             android:name=".Sign_up"
             android:label="@string/title_activity_sign_up"
@@ -52,7 +50,6 @@
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value="com.jshikami235gmail.pataride.MainActivity" />
         </activity>
-
         <activity
             android:name=".Login"
             android:label="@string/title_activity_login"
@@ -78,14 +75,11 @@
             android:name=".MapsActivity"
             android:label="@string/title_activity_maps" >
         </activity>
-
         <activity
             android:name=".Pay"
             android:label="@string/title_activity_pay"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
-
-
         <activity
             android:name=".thanks"
             android:label="@string/title_activity_thanks"
@@ -100,6 +94,12 @@
         <meta-data
             android:name="com.google.android.gms.wallet.api.enabled"
             android:value="true" />
+
+        <activity
+            android:name=".Home_screeen"
+            android:label="@string/title_activity_home_screeen"
+            android:theme="@style/AppTheme.NoActionBar" >
+        </activity>
     </application>
 
 </manifest>

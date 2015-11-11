@@ -54,4 +54,5 @@
     <string name="sign_In">Sign in</string>
     <string name="toast">Successfully signed up!)</string>
     <string name="tv_pwd_1">Password</string>
+    <string name="title_activity_home_screeen">Home_screeen</string>
 </resources>
