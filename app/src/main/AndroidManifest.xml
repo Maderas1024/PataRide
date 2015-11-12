@@ -33,31 +33,22 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".MainActivity"
-            android:label="@string/title_activity_main"
-            android:parentActivityName=".Splash_screen"
-            android:theme="@style/AppTheme.NoActionBar" >
-            <meta-data
-                android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.jshikami235gmail.pataride.Splash_screen" />
-        </activity>
-        <activity
             android:name=".Sign_up"
             android:label="@string/title_activity_sign_up"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".Welcome"
             android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.jshikami235gmail.pataride.MainActivity" />
+                android:value="com.jshikami235gmail.pataride.Welcome" />
         </activity>
         <activity
             android:name=".Login"
             android:label="@string/title_activity_login"
-            android:parentActivityName=".MainActivity"
+            android:parentActivityName=".Welcome"
             android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.jshikami235gmail.pataride.MainActivity" />
+                android:value="com.jshikami235gmail.pataride.Welcome" />
         </activity>
         <!--
              The API key for Google Maps-based APIs is defined as a string resource.
@@ -96,8 +87,8 @@
             android:value="true" />
 
         <activity
-            android:name=".Home_screeen"
-            android:label="@string/title_activity_home_screeen"
+            android:name=".Welcome"
+            android:label="@string/title_activity_welcome"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
     </application>

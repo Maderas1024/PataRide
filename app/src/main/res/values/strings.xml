@@ -55,4 +55,13 @@
     <string name="toast">Successfully signed up!)</string>
     <string name="tv_pwd_1">Password</string>
     <string name="title_activity_home_screeen">Home_screeen</string>
+    <string name="title_activity_welcome">Welcome</string>
+    <string name="hint_email">hint_mail</string>
+    <string name="hint_password">hint_pwwd</string>
+    <string name="hint_Location">hint_location</string>
+    <string name="hint_Destination">hint_destination</string>
+    <string name="hint">Email</string>
+    <string name="pwd_hint">Password</string>
+    <string name="email_et">Email</string>
+    <string name="first_et">First Name</string>
 </resources>

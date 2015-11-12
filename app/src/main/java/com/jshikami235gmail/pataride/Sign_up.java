@@ -27,6 +27,11 @@ import org.json.JSONObject;
 import java.lang.reflect.Method;
 import java.util.HashMap;
 import java.util.Map;
+import java.util.regex.Matcher;
+import java.util.regex.Pattern;
+
+import static com.jshikami235gmail.pataride.R.id.email_1;
+import static com.jshikami235gmail.pataride.R.id.email_s;
 
 public class Sign_up extends Activity {
 
@@ -37,6 +42,21 @@ public class Sign_up extends Activity {
     private SessionManager session;
     private SQLiteHandler db;
 
+    public static boolean isValidEmail(String str) {
+        boolean isValid = false;
+        if (Build.VERSION.SDK_INT >= 7) {
+            return android.util.Patterns.EMAIL_ADDRESS.matcher(str).matches();
+        }
+        String expression = "^[_A-Za-z0-9-]+(\\.[_A-Za-z0-9-]+)*@[A-Za-z0-9]+(\\.[A-Za-z0-9]+)*(\\.[A-Za-z]{2,})$";
+        CharSequence inputStr = str;
+        Pattern pattern = Pattern.compile(expression);
+        Matcher matcher = pattern.matcher(inputStr);
+        if (matcher.matches()) {
+            isValid = true;
+        }
+        return isValid;
+    }
+
 
     @TargetApi(Build.VERSION_CODES.LOLLIPOP)
     @Override
@@ -46,7 +66,7 @@ public class Sign_up extends Activity {
 
         inputFirstName = (EditText) findViewById(R.id.first_name);
         inputSecondName =(EditText) findViewById(R.id.second_name);
-        inputEmail = (EditText) findViewById(R.id.email);
+        inputEmail = (EditText) findViewById(email_s);
         inputPassword = (EditText) findViewById(R.id.password);
         btn_signUp = (Button) findViewById(R.id.btn_signUp);
 
