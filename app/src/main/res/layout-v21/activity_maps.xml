@@ -7,18 +7,6 @@
     tools:context="com.jshikami235gmail.pataride.MapsActivity"
     android:name="com.google.android.gms.maps.SupportMapFragment"
     tools:layout="@layout/abc_screen_simple">
-
-    <android.support.v7.widget.Toolbar xmlns:android="http://schemas.android.com/apk/res/android"
-        xmlns:app="http://schemas.android.com/apk/res-auto"
-        android:id="@+id/toolbar"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_alignParentTop="true"
-        android:background="?attr/colorPrimary"
-        android:minHeight="?attr/actionBarSize"
-        app:popupTheme="@style/ThemeOverlay.AppCompat.Light"
-        app:theme="@style/ThemeOverlay.AppCompat.Dark.ActionBar" />
-
     <LinearLayout
         android:id="@+id/layout"
         android:layout_width="fill_parent"
@@ -39,7 +27,7 @@
                 android:id="@+id/input_location"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/hint_Location"
+                android:hint="Location"
                 android:inputType="text" />
         </android.support.design.widget.TextInputLayout>
 
@@ -52,7 +40,7 @@
                 android:id="@+id/input_destination"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:hint="@string/hint_Destination"
+                android:hint="Destination"
                 android:inputType="text" />
         </android.support.design.widget.TextInputLayout>
     </LinearLayout>

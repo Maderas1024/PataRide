@@ -6,6 +6,7 @@ import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 import android.database.sqlite.SQLiteOpenHelper;
 import android.util.Log;
+import android.widget.EditText;
 
 import java.util.HashMap;
 
@@ -69,12 +70,12 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     /**
      * Storing user details in database
      * */
-    public void addUser(String first_name, String name, String email, String uid, String created_at) {
+    public void addUser(EditText first_name, EditText name, String email, String uid, String created_at) {
         SQLiteDatabase db = this.getWritableDatabase();
 
         ContentValues values = new ContentValues();
-        values.put(KEY_FIRST_NAME, name); // Name
-        values.put(KEY_SECOND_NAME, name); // Name
+        values.put(KEY_FIRST_NAME, String.valueOf(name)); // Name
+        values.put(KEY_SECOND_NAME, String.valueOf(name)); // Name
         values.put(KEY_EMAIL, email); // Email
         values.put(KEY_UID, uid); // Email
         values.put(KEY_CREATED_AT, created_at); // Created At

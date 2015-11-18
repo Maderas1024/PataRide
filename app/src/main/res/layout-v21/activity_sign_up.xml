@@ -1,4 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
+
+<ScrollView
+xmlns:android="http://schemas.android.com/apk/res/android"
+android:layout_width="fill_parent"
+android:layout_height="fill_parent" >
+<!-- Here you put the rest of your current view-->
+
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
@@ -13,7 +20,8 @@
         android:layout_height="wrap_content"
         android:id="@+id/first_name"
         android:hint="@string/first_et"
-        android:layout_marginTop="57dp"
+        android:textColor="#6c6c6c"
+        android:layout_marginTop="45dp"
         android:inputType="textPersonName"
         android:layout_marginLeft="50dp"
         android:layout_alignParentTop="true"
@@ -30,6 +38,7 @@
         android:layout_marginTop="50dp"
         android:layout_below="@+id/first_name"
         android:layout_marginBottom="20dp"
+        android:textColor="#6c6c6c"
         android:inputType="textPersonName"
         android:layout_alignRight="@+id/first_name"
         android:layout_alignEnd="@+id/first_name"
@@ -40,6 +49,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/email_s"
+        android:textColor="#6c6c6c"
         android:inputType="textEmailAddress"
         android:hint="@string/email_et"
         android:layout_below="@+id/second_name"
@@ -55,6 +65,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:inputType="textPassword"
+        android:textColor="#6c6c6c"
         android:ems="10"
         android:hint="Password"
         android:layout_marginTop="50dp"
@@ -76,10 +87,10 @@
         android:id="@+id/btn_signUp"
         android:layout_alignRight="@+id/first_name"
         android:layout_alignEnd="@+id/first_name"
-        android:layout_marginBottom="90dp"
-        android:layout_marginTop="0dp"
+        android:layout_marginBottom="100dp"
         android:layout_alignLeft="@+id/password"
         android:layout_alignStart="@+id/password" />
 
 
 </RelativeLayout>
+</ScrollView>
