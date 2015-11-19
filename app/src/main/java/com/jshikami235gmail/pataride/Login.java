@@ -29,7 +29,7 @@ import static android.view.View.*;
 
 public class Login extends Activity implements View.OnClickListener {
 
-    private static final String TAG = Sign_up.class.getSimpleName();
+    private static final String TAG = Login.class.getSimpleName();
     private Button btn_signIn;
     private EditText first_name, second_name, inputEmail, inputPassword;
     private ProgressDialog pDialog;
@@ -108,7 +108,7 @@ public class Login extends Activity implements View.OnClickListener {
         pDialog.setCancelable(false);
 
 
-        // Check if user is already logged in or not
+        // Checking if user is already logged in or not
         // Session manager
         session = new SessionManager(getApplicationContext());
 
