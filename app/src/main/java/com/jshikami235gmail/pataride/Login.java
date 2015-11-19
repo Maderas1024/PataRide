@@ -58,27 +58,36 @@ public class Login extends Activity implements View.OnClickListener {
                         inputPassword = (EditText) findViewById(R.id.pwd_l);
 
 
-                }
+                        }
+                          //Checking for empty fieldsWSQqw2qQ
+                            String strEmailAddress = inputEmail.getText().toString().trim();
+                            String strPassword = inputPassword.getText().toString().trim();
 
-                String strEmailAddress = inputEmail.getText().toString().trim();
-                String strPassword = inputPassword.getText().toString().trim();
-
-                Log.d("<email>", strEmailAddress);
-                Log.d("<password>", strPassword);
+                            Log.d("<email>", strEmailAddress);
+                            Log.d("<password>", strPassword);
 
 
-                if (!strEmailAddress.isEmpty() && !strPassword.isEmpty()) {
-                    // login user
-                    checkLogin(strEmailAddress, strPassword);
-                } else Toast.makeText(getApplicationContext(),
-                        "Please enter credentials!", Toast.LENGTH_LONG)
-                        .show();
+                                if (!strEmailAddress.isEmpty() && !strPassword.isEmpty()) {
+                                    // login user
+                                    checkLogin(strEmailAddress, strPassword);
+                                } else Toast.makeText(getApplicationContext(),
+                                        "Please enter credentials!", Toast.LENGTH_LONG)
+                                        .show();
 
-                // TODO Auto-generated method stub
+                                    if ( inputPassword.getText().toString().length() > 4 ){
+                                       Toast.makeText(getApplicationContext()," nice length of password.", Toast.LENGTH_LONG).show();
+                                }
+                                else
+                                {
+                                    Toast.makeText(getApplicationContext(),
+                                            "Username should be minimum 5 characters", Toast.LENGTH_SHORT).show();
+                                }
 
-                Intent intent = new Intent(Login.this, MapsActivity.class);
-                startActivity(intent);
-                finish();
+                        // TODO Auto-generated method stub
+
+                        Intent intent = new Intent(Login.this, MapsActivity.class);
+                        startActivity(intent);
+                        finish();
 
             }
 
@@ -143,7 +152,7 @@ public class Login extends Activity implements View.OnClickListener {
         pDialog.setMessage("Logging in ...");
         showDialog();
 
-        StringRequest strReq = new StringRequest(Request.Method.POST,
+        StringRequest strReq = new StringRequest(Request.Method.GET,
                 URL_LOGIN, new Response.Listener<String>() {
 
             @Override

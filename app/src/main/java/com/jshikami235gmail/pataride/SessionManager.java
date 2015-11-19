@@ -21,7 +21,7 @@ public class SessionManager {
     int PRIVATE_MODE = 0;
 
     // Shared preferences file name
-    private static final String PREF_NAME = "PataRideSignIn";
+    private static final String PREF_NAME = "PataRideSignUp";
 
     private static final String KEY_IS_LOGGEDIN = "isLoggedIn";
 
@@ -38,7 +38,8 @@ public class SessionManager {
         // commit changes
         editor.commit();
 
-        Log.d(TAG, "com.jshikami235gmail.pataride.User login session modified!");
+        Log.d(TAG, "User login session modified!");
+
     }
 
     public boolean isLoggedIn(){

@@ -9,5 +9,5 @@ public class AppConfig {
     public static String URL_LOGIN = "http://10.0.2.2/pataride_api/login.php";
 
     // Server user register url
-    public static String URL_REGISTER = "http://10.0.2.2/pataride_api/sign_up.php";
+    public static String URL_SIGN_UP = "http://10.0.2.2/pataride_api/sign_up.php";
 }

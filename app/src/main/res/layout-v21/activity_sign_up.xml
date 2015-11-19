@@ -1,18 +1,33 @@
 <?xml version="1.0" encoding="utf-8"?>
 
-<ScrollView
-xmlns:android="http://schemas.android.com/apk/res/android"
-android:layout_width="fill_parent"
-android:layout_height="fill_parent" >
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="fill_parent"
+    android:layout_height="fill_parent"
+    xmlns:app="http://schemas.android.com/apk/res-auto">
 <!-- Here you put the rest of your current view-->
 
 <RelativeLayout
     xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
+    android:layout_height="wrap_content"
     android:fitsSystemWindows="true"
     tools:context="com.jshikami235gmail.pataride.Sign_up">
+
+    <android.support.design.widget.AppBarLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:theme="@style/AppTheme.AppBarOverlay">
+
+        <android.support.v7.widget.Toolbar android:id="@+id/toolbar"
+            android:layout_width="match_parent"
+            android:layout_height="?attr/actionBarSize"
+            android:background="?attr/colorPrimary"
+            android:navigationIcon="@drawable/icon1"
+            app:popupTheme="@style/AppTheme.PopupOverlay" />
+
+    </android.support.design.widget.AppBarLayout>
+
 
 
     <EditText
@@ -21,7 +36,7 @@ android:layout_height="fill_parent" >
         android:id="@+id/first_name"
         android:hint="@string/first_et"
         android:textColor="#6c6c6c"
-        android:layout_marginTop="45dp"
+        android:layout_marginTop="65dp"
         android:inputType="textPersonName"
         android:layout_marginLeft="50dp"
         android:layout_alignParentTop="true"

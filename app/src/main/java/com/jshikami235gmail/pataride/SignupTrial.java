@@ -28,7 +28,7 @@ import java.util.Map;
 public class SignupTrial extends AppCompatActivity implements View.OnClickListener{
     EditText fname,lname,email,password;
     Button btnSignin;
-    String url = "http://10.0.2.2/pataride_api/sign_up.php";
+    String url_SIGN_UP = "http://10.0.2.2/pataride_api/sign_up.php";
 
 
     private SessionManager session;
@@ -61,8 +61,7 @@ public class SignupTrial extends AppCompatActivity implements View.OnClickListen
                     user.setEmail(email.getText().toString());
 
                     storeUser(user);
-                    Intent intent = new Intent(SignupTrial.this,
-                            MapsActivity.class);
+                    Intent intent = new Intent(SignupTrial.this, MapsActivity.class);
                     startActivity(intent);
                     finish();
 
@@ -83,13 +82,16 @@ public class SignupTrial extends AppCompatActivity implements View.OnClickListen
             }
 
 
-        if (fname.getText().toString().trim().equals("") || lname.getText().toString().trim().equals("") || email.getText().toString().trim().equals("") || password.getText().toString().trim().equals("")) {
+        if (fname.getText().toString().trim().equals("") ||
+                lname.getText().toString().trim().equals("") ||
+                email.getText().toString().trim().equals("") ||
+                password.getText().toString().trim().equals("")) {
             Toast.makeText(getApplication(), ("Please make sure you entered all fields correctly."), Toast.LENGTH_LONG).show();
         } else {
 
             // Instantiate the RequestQueue.
             RequestQueue queue = Volley.newRequestQueue(SignupTrial.this);
-             String url = "http://10.0.2.2/pataride_api/sign_up.php";
+             String url = "http://192.168.44.40/pataride_api/sign_up.php";
                // Request a string response from the provided URL.
                StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
                     new Response.Listener<String>() {
@@ -109,16 +111,15 @@ public class SignupTrial extends AppCompatActivity implements View.OnClickListen
                         }
                     });
 
+             }
+
         }
+    
 
-    }
+        public void storeUser(final User user){
+            RequestQueue queue = Volley.newRequestQueue(this);
 
-
-
-    public void storeUser(final User user){
-        RequestQueue queue = Volley.newRequestQueue(this);
-
-        final StringRequest request = new StringRequest(Request.Method.POST, url, new Response.Listener<String>() {
+            final StringRequest request = new StringRequest(Request.Method.POST, url_SIGN_UP, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.d("Response",response.toString());
