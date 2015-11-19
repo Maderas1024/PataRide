@@ -37,8 +37,10 @@ public class SignupTrial extends AppCompatActivity implements View.OnClickListen
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_signup_trial);
+
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
+        setTitle("Sign up");
 
         fname = (EditText) findViewById(R.id.etfname);
         lname = (EditText) findViewById(R.id.etlname);
@@ -114,7 +116,7 @@ public class SignupTrial extends AppCompatActivity implements View.OnClickListen
              }
 
         }
-    
+
 
         public void storeUser(final User user){
             RequestQueue queue = Volley.newRequestQueue(this);

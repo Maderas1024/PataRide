@@ -7,45 +7,54 @@
     android:fitsSystemWindows="true"
     tools:context="com.jshikami235gmail.pataride.thanks">
 
+    <android.support.design.widget.AppBarLayout
+        android:layout_height="wrap_content"
+        android:layout_width="match_parent"
+        android:theme="@style/AppTheme.AppBarOverlay" />
+
     <android.support.v7.widget.Toolbar
         android:id="@+id/toolbar"
         android:layout_width="match_parent"
-        android:layout_height="?attr/actionBarSize"
+        android:layout_height="?attr/actionBarTabBarStyle"
         android:background="?attr/colorPrimary"
         app:popupTheme="@style/AppTheme.PopupOverlay" />
 
-<android.support.design.widget.AppBarLayout
+    <TextView
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_width="match_parent"
-        android:theme="@style/AppTheme.AppBarOverlay"/>
+        android:textAppearance="?android:attr/textAppearanceLarge"
+        android:text="@string/tv_thanks"
+        android:layout_alignParentTop="true"
+        android:id="@+id/textView2"
+        android:layout_marginTop="70dp"
+        android:layout_marginBottom="0dp"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginLeft="10dp"
+        android:layout_marginRight="10dp" />
 
-    <include layout="@layout/content_thanks"
+    <ImageView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:layout_marginTop="50dp"
+        android:src="@drawable/man"
+        android:contentDescription="pic"
+
         android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="false"
-        android:layout_above="@+id/fab"
-        android:id="@+id/include" />
+        android:layout_alignParentStart="true"
+        android:layout_alignParentBottom="true"
+        android:layout_below="@+id/textView2"
+        android:layout_marginBottom="150dp"
+        android:id="@+id/imageView" />
 
     <RatingBar
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:id="@+id/ratingBar"
-        android:layout_above="@+id/fab"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true" />
-
-    <android.support.design.widget.FloatingActionButton
-        android:id="@+id/fab"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_gravity="bottom|end"
-        android:src="@android:drawable/ic_dialog_email"
+        android:id="@+id/ratingBar2"
         android:layout_alignParentBottom="true"
-        android:layout_alignParentRight="true"
-        android:layout_alignParentEnd="true" />
-
-
-
+        android:layout_alignLeft="@+id/textView2"
+        android:layout_alignStart="@+id/textView2"
+        android:layout_marginBottom="100dp"
+        android:layout_marginLeft="10dp" />
 </RelativeLayout>

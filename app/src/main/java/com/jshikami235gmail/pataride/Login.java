@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -40,6 +41,8 @@ public class Login extends Activity implements View.OnClickListener {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
+        setTitle("Sign in");
 
         inputEmail = (EditText) findViewById(R.id.email_l);
         inputPassword = (EditText) findViewById(R.id.password);

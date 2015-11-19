@@ -25,10 +25,11 @@ public class Pay extends AppCompatActivity {
 
                 // currentContext.startActivity(activityChangeIntent);
 
-             Pay.this.startActivity(activityChangeIntent);
+                Pay.this.startActivity(activityChangeIntent);
             }
         });
 
     }
+
 
 }
