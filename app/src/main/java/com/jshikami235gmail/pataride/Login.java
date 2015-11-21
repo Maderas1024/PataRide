@@ -45,7 +45,7 @@ public class Login extends Activity implements View.OnClickListener {
         setTitle("Sign in");
 
         inputEmail = (EditText) findViewById(R.id.email_l);
-        inputPassword = (EditText) findViewById(R.id.password);
+        inputPassword = (EditText) findViewById(R.id.pwd_l);
 
         btn_signIn = (Button) findViewById(R.id.btn_signIn);
 

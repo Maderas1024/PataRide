@@ -23,17 +23,17 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     private static final int DATABASE_VERSION = 1;
 
     // Database Name
-    private static final String DATABASE_NAME = "PATARIDE";
+    private static final String DATABASE_NAME = "PATARIDE.db";
 
     // Login table name
     private static final String TABLE_USER = "users";
 
     // Login Table Columns names
     private static final String KEY_ID = "id";
+    private static final String KEY_UID = "uid";
     private static final String KEY_FIRST_NAME = "first_name";
     private static final String KEY_SECOND_NAME = "second_name";
     private static final String KEY_EMAIL = "email";
-    private static final String KEY_UID = "uid";
     private static final String KEY_CREATED_AT = "created_at";
 
     public SQLiteHandler(Context context) {
@@ -47,13 +47,16 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     // Creating Tables
     @Override
     public void onCreate(SQLiteDatabase db) {
-        String CREATE_LOGIN_TABLE = "CREATE TABLE " + TABLE_USER + "("
-                + KEY_ID + " INTEGER PRIMARY KEY," + KEY_FIRST_NAME + " TEXT," + KEY_SECOND_NAME + " TEXT,"
-                + KEY_EMAIL + " TEXT UNIQUE," + KEY_UID + " TEXT,"
-                + KEY_CREATED_AT + " TEXT" + ")";
-        db.execSQL(CREATE_LOGIN_TABLE);
+        String query = "CREATE TABLE " + TABLE_USER + "(" +
+                 KEY_ID + " INTEGER PRIMARY KEY AUTOINCREMENT, " +
+                 KEY_FIRST_NAME + " TEXT," +
+                 KEY_SECOND_NAME + " TEXT," +
+                 KEY_EMAIL + " TEXT UNIQUE," +
+                 KEY_UID + " INTEGER, " +
+                 KEY_CREATED_AT + " TEXT" + ");";
 
-        Log.d(TAG, "Database tables created");
+        db.execSQL(query);
+        Log.d(TAG, "Database table created");
     }
 
 
@@ -64,7 +67,6 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 
         // Create tables again
         onCreate(db);
-
     }
 
     /**
@@ -124,4 +126,8 @@ public class SQLiteHandler extends SQLiteOpenHelper {
 
         Log.d(TAG, "Deleted all user info from sqlite");
     }
+
+    //Printing out the db as a sstring
+
+
 }

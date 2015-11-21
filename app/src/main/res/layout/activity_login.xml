@@ -28,7 +28,7 @@
         android:textColor="#6c6c6c"
         android:hint="@string/hint"
         android:id="@+id/email_1"
-        android:layout_marginTop="50dp"
+        android:layout_marginTop="70dp"
         android:layout_alignLeft="@+id/pwd_l"
         android:layout_alignStart="@+id/pwd_l" />
 

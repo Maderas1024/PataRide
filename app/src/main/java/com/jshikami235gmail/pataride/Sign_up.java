@@ -26,18 +26,20 @@ public class Sign_up extends AppCompatActivity implements View.OnClickListener{
     EditText fname,lname,email,password;
     Button btnSignin;
     String url_SIGN_UP = "http://10.0.2.2/pataride_api/sign_up.php";
-
+   //SQLiteHandler sqLiteHandler;
 
     private SessionManager session;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_signup_trial);
+        setContentView(R.layout.sign_up);
 
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         setTitle("Sign up");
+
+    //    sqliteHandler = new SQLiteHandler (this, null, null, 1);
 
         fname = (EditText) findViewById(R.id.etfname);
         lname = (EditText) findViewById(R.id.etlname);
@@ -82,9 +84,9 @@ public class Sign_up extends AppCompatActivity implements View.OnClickListener{
 
 
         if (fname.getText().toString().trim().equals("") ||
-                lname.getText().toString().trim().equals("") ||
+              lname.getText().toString().trim().equals("") ||
                 email.getText().toString().trim().equals("") ||
-                password.getText().toString().trim().equals("")) {
+                 password.getText().toString().trim().equals("")) {
             Toast.makeText(getApplication(), ("Please make sure you entered all fields correctly."), Toast.LENGTH_LONG).show();
         } else {
 

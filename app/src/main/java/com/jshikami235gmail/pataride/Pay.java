@@ -26,10 +26,27 @@ public class Pay extends AppCompatActivity {
                 // currentContext.startActivity(activityChangeIntent);
 
                 Pay.this.startActivity(activityChangeIntent);
+
             }
         });
 
+                Button button = (Button) findViewById(R.id.btn_decline);
+                button.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View v) {
+                        // Perform action on click
+
+                        Intent activityChangeIntent = new Intent(Pay.this, Welcome.class);
+
+                        // currentContext.startActivity(activityChangeIntent);
+
+                        Pay.this.startActivity(activityChangeIntent);
+
+
     }
 
+
+      });
+
+    }
 
 }
