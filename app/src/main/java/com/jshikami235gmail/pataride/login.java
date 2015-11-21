@@ -1,9 +1,11 @@
 package com.jshikami235gmail.pataride;
 
-import android.app.Activity;
 import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
+import android.support.design.widget.FloatingActionButton;
+import android.support.design.widget.Snackbar;
+import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
@@ -21,15 +23,11 @@ import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
-import java.util.regex.Matcher;
-import java.util.regex.Pattern;
 
-import static android.view.View.*;
+public class login extends AppCompatActivity {
 
 
-public class Login extends Activity implements View.OnClickListener {
-
-    private static final String TAG = Login.class.getSimpleName();
+    private static final String TAG = login.class.getSimpleName();
     private Button btn_signIn;
     private EditText first_name, second_name, inputEmail, inputPassword;
     private ProgressDialog pDialog;
@@ -37,12 +35,22 @@ public class Login extends Activity implements View.OnClickListener {
     private SQLiteHandler db;
     String URL_LOGIN = "http://10.0.2.2/pataride_api/login.php";
 
+
     @Override
-    public void onCreate(Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        Toolbar toolbar = (Toolbar)findViewById(R.id.toolbar);
-        setTitle("Sign in");
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+
+        FloatingActionButton fab = (FloatingActionButton) findViewById(R.id.fab);
+        fab.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+                        .setAction("Action", null).show();
+            }
+        });
 
         inputEmail = (EditText) findViewById(R.id.email_l);
         inputPassword = (EditText) findViewById(R.id.pwd_l);
@@ -61,36 +69,36 @@ public class Login extends Activity implements View.OnClickListener {
                         inputPassword = (EditText) findViewById(R.id.pwd_l);
 
 
-                        }
-                          //Checking for empty fieldsWSQqw2qQ
-                            String strEmailAddress = inputEmail.getText().toString().trim();
-                            String strPassword = inputPassword.getText().toString().trim();
+                }
+                //Checking for empty fieldsWSQqw2qQ
+                String strEmailAddress = inputEmail.getText().toString().trim();
+                String strPassword = inputPassword.getText().toString().trim();
 
-                            Log.d("<email>", strEmailAddress);
-                            Log.d("<password>", strPassword);
+                Log.d("<email>", strEmailAddress);
+                Log.d("<password>", strPassword);
 
 
-                                if (!strEmailAddress.isEmpty() && !strPassword.isEmpty()) {
-                                    // login user
-                                    checkLogin(strEmailAddress, strPassword);
-                                } else Toast.makeText(getApplicationContext(),
-                                        "Please enter credentials!", Toast.LENGTH_LONG)
-                                        .show();
+                if (!strEmailAddress.isEmpty() && !strPassword.isEmpty()) {
+                    // login user
+                    checkLogin(strEmailAddress, strPassword);
+                } else Toast.makeText(getApplicationContext(),
+                        "Please enter credentials!", Toast.LENGTH_LONG)
+                        .show();
 
-                                    if ( inputPassword.getText().toString().length() > 4 ){
-                                       Toast.makeText(getApplicationContext()," nice length of password.", Toast.LENGTH_LONG).show();
-                                }
-                                else
-                                {
-                                    Toast.makeText(getApplicationContext(),
-                                            "Username should be minimum 5 characters", Toast.LENGTH_SHORT).show();
-                                }
+                if ( inputPassword.getText().toString().length() > 4 ){
+                    Toast.makeText(getApplicationContext()," nice length of password.", Toast.LENGTH_LONG).show();
+                }
+                else
+                {
+                    Toast.makeText(getApplicationContext(),
+                            "Username should be minimum 5 characters", Toast.LENGTH_SHORT).show();
+                }
 
-                        // TODO Auto-generated method stub
+                //TODO Auto-generated method stub
 
-                        Intent intent = new Intent(Login.this, MapsActivity.class);
-                        startActivity(intent);
-                        finish();
+                Intent intent = new Intent(login.this, MapsActivity.class);
+                startActivity(intent);
+                finish();
 
             }
 
@@ -113,12 +121,12 @@ public class Login extends Activity implements View.OnClickListener {
         session = new SessionManager(getApplicationContext());
 
         if (session.isLoggedIn()) {
-            Intent intent = new Intent(Login.this, MapsActivity.class);
+            Intent intent = new Intent(login.this, MapsActivity.class);
             startActivity(intent);
             finish();
         }
 
-        btn_signIn.setOnClickListener(new OnClickListener() {
+        btn_signIn.setOnClickListener(new View.OnClickListener() {
 
             public void onClick(View view) {
                 String email = inputEmail.getText().toString().trim();
@@ -133,7 +141,7 @@ public class Login extends Activity implements View.OnClickListener {
                         "Please enter the credentials!", Toast.LENGTH_LONG)
                         .show();
 
-                Intent intent = new Intent(Login.this, MapsActivity.class);
+                Intent intent = new Intent(login.this, MapsActivity.class);
                 startActivity(intent);
                 finish();
 
@@ -160,7 +168,7 @@ public class Login extends Activity implements View.OnClickListener {
 
             @Override
             public void onResponse(String response) {
-                Log.d(TAG, "Login Response: " + response.toString());
+                Log.d(TAG, "login Response: " + response.toString());
                 hideDialog();
 
                 try {
@@ -186,7 +194,7 @@ public class Login extends Activity implements View.OnClickListener {
                         db.addUser(first_name, second_name, email, uid, created_at);
 
                         // Launch Maps activity
-                        Intent intent = new Intent(Login.this,
+                        Intent intent = new Intent(login.this,
                                 MapsActivity.class);
                         startActivity(intent);
                         finish();
@@ -207,7 +215,7 @@ public class Login extends Activity implements View.OnClickListener {
 
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.e(TAG, "Login Error: " + error.getMessage());
+                Log.e(TAG, "login Error: " + error.getMessage());
                 Toast.makeText(getApplicationContext(),
                         error.getMessage(), Toast.LENGTH_LONG).show();
                 hideDialog();
@@ -240,14 +248,6 @@ public class Login extends Activity implements View.OnClickListener {
             pDialog.dismiss();
     }
 
-    @Override
-    public void onClick(View v) {
-
-    }
 }
-
-
-
-
 
 

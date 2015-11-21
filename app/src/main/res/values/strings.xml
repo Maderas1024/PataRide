@@ -65,4 +65,7 @@
     <string name="email_et">Email</string>
     <string name="first_et">First Name</string>
     <string name="title_activity_signup_trial">SignupTrial</string>
+    <string name="title_activity_payment">payment</string>
+    <string name="title_activity_thanks2">thanks2</string>
+    <string name="title_activity_maps2">Map</string>
 </resources>

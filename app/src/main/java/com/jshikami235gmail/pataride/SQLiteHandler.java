@@ -25,10 +25,10 @@ public class SQLiteHandler extends SQLiteOpenHelper {
     // Database Name
     private static final String DATABASE_NAME = "PATARIDE.db";
 
-    // Login table name
+    // login table name
     private static final String TABLE_USER = "users";
 
-    // Login Table Columns names
+    // login Table Columns names
     private static final String KEY_ID = "id";
     private static final String KEY_UID = "uid";
     private static final String KEY_FIRST_NAME = "first_name";

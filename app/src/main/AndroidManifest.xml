@@ -20,7 +20,7 @@
     <application
         android:name=".AppController"
         android:allowBackup="true"
-        android:icon="@mipmap/ic_launcher"
+        android:icon="@drawable/icon1"
         android:label="@string/app_name"
         android:supportsRtl="true"
         android:theme="@style/AppTheme" >
@@ -35,7 +35,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".Login"
+            android:name=".login"
             android:label="@string/title_activity_login"
             android:parentActivityName=".Welcome"
             android:theme="@style/AppTheme.NoActionBar" >
@@ -60,18 +60,18 @@
             android:label="@string/title_activity_maps" >
         </activity>
         <activity
-            android:name=".Pay"
-            android:label="@string/title_activity_pay"
+            android:name=".payment"
+            android:label="@string/title_activity_payment"
             android:theme="@style/AppTheme.NoActionBar" >
         </activity>
         <activity
             android:name=".thanks"
             android:label="@string/title_activity_thanks"
-            android:parentActivityName=".Pay"
+            android:parentActivityName=".payment"
             android:theme="@style/AppTheme.NoActionBar" >
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
-                android:value="com.jshikami235gmail.pataride.Pay" />
+                android:value="com.jshikami235gmail.pataride.payment" />
         </activity>
 
         <!-- Enables the Android Pay API -->
