@@ -18,6 +18,7 @@ import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
 import com.android.volley.toolbox.Volley;
+import com.jshikami235gmail.pataride.utils.SessionManager;
 
 import java.util.HashMap;
 import java.util.Map;
@@ -25,7 +26,7 @@ import java.util.Map;
 public class Sign_up extends AppCompatActivity implements View.OnClickListener{
     EditText fname,lname,email,password;
     Button btnSignin;
-    String url_SIGN_UP = "http://10.0.2.2/pataride_api/sign_up.php";
+    String url_SIGNUP = "http://10.0.2.2/pataride_api/sign_up.php";
    //SQLiteHandler sqLiteHandler;
 
     private SessionManager session;
@@ -79,9 +80,7 @@ public class Sign_up extends AppCompatActivity implements View.OnClickListener{
                 startActivity(intent);
                 finish();
 
-
             }
-
 
         if (fname.getText().toString().trim().equals("") ||
               lname.getText().toString().trim().equals("") ||
@@ -120,7 +119,7 @@ public class Sign_up extends AppCompatActivity implements View.OnClickListener{
         public void storeUser(final User user){
             RequestQueue queue = Volley.newRequestQueue(this);
 
-            final StringRequest request = new StringRequest(Request.Method.POST, url_SIGN_UP, new Response.Listener<String>() {
+            final StringRequest request = new StringRequest(Request.Method.POST, url_SIGNUP, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
                 Log.d("Response",response.toString());

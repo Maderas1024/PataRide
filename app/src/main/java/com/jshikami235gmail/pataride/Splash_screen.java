@@ -1,26 +1,17 @@
 package com.jshikami235gmail.pataride;
 
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
-import android.view.View;
 import android.view.Menu;
-import android.view.MenuItem;
 import android.content.Intent;
 import android.os.Handler;
+
+import com.jshikami235gmail.pataride.utils.SessionManager;
 
 import static com.jshikami235gmail.pataride.R.menu.menu_splash_screen;
 
 
 public class Splash_screen extends AppCompatActivity {
-
-    /**
-     * Duration of wait
-     **/
-    private final int SPLASH_DISPLAY_LENGTH = 3000;
-
     /**
      * Called when the activity is first created.
      */
@@ -31,13 +22,28 @@ public class Splash_screen extends AppCompatActivity {
 
         /* New Handler to start the Menu-Activity
          * and close this Splash-Screen after some seconds.*/
+        /*
+      Duration of wait
+     */
+        int SPLASH_DISPLAY_LENGTH = 3000;
+
         new Handler().postDelayed(new Runnable() {
             @Override
             public void run() {
-                /* Create an Intent that will start the Menu-Activity. */
-                Intent mainIntent = new Intent(Splash_screen.this, Welcome.class);
-                Splash_screen.this.startActivity(mainIntent);
-                Splash_screen.this.finish();
+
+                // Checking if user is already logged in or not
+                SessionManager session = new SessionManager(getApplicationContext());
+
+                if (session.isLoggedIn()) {
+                    Intent intent = new Intent(Splash_screen.this, MapsActivity.class);
+                    startActivity(intent);
+                    finish();
+                } else {
+                      /* Create an Intent that will start the Menu-Activity. */
+                    Intent mainIntent = new Intent(Splash_screen.this, Welcome.class);
+                    Splash_screen.this.startActivity(mainIntent);
+                    Splash_screen.this.finish();
+                }
             }
         }, SPLASH_DISPLAY_LENGTH);
     }
@@ -48,7 +54,6 @@ public class Splash_screen extends AppCompatActivity {
         getMenuInflater().inflate(menu_splash_screen, menu);
         return true;
     }
-
 
 
 }
