@@ -27,9 +27,7 @@ import java.util.Map;
 
 public class login extends AppCompatActivity {
 
-    private static final String TAG = Sign_up.class.getSimpleName();
-    private Button btnLogin;
-    private Button btnLinkToRegister;
+    private static final String TAG = login.class.getSimpleName();
     private EditText inputEmail;
     private EditText inputPassword;
     private ProgressDialog pDialog;
@@ -40,71 +38,66 @@ public class login extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        setTitle("PataRide");
 
+        inputEmail = (EditText) findViewById(R.id.email_l);
+        inputPassword = (EditText) findViewById(R.id.pwd_l);
+        Button btnLogin = (Button) findViewById(R.id.btn_signIn);
+        Button btnLinkToRegister = (Button) findViewById(R.id.btnLinkToSignInScreen);
 
-            inputEmail = (EditText) findViewById(R.id.email_l);
-            inputPassword = (EditText) findViewById(R.id.pwd_l);
-            btnLogin = (Button) findViewById(R.id.btn_signIn);
-            btnLinkToRegister = (Button) findViewById(R.id.btnLinkToSignInScreen);
+        // Progress dialog
+        pDialog = new ProgressDialog(this);
+        pDialog.setCancelable(false);
 
-            // Progress dialog
-            pDialog = new ProgressDialog(this);
-            pDialog.setCancelable(false);
+        // SQLite database handler
+        db = new SQLiteHandler(getApplicationContext());
 
-            // SQLite database handler
-            db = new SQLiteHandler(getApplicationContext());
+        // Session manager
+        session = new SessionManager(getApplicationContext());
 
-            // Session manager
-            session = new SessionManager(getApplicationContext());
+        // Check if user is already logged in or not
+        if (session.isLoggedIn()) {
+            // User is already logged in. Take him to main activity
+            Intent intent = new Intent(login.this, MapsActivity.class);
+            startActivity(intent);
+            finish();
+        }
 
-                // Check if user is already logged in or not
-                if (session.isLoggedIn()) {
-                    // User is already logged in. Take him to main activity
-                    Intent intent = new Intent(login.this, MapsActivity.class);
-                    startActivity(intent);
-                    finish();
+        // Login button Click Event
+        btnLogin.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                String email = inputEmail.getText().toString().trim();
+                String password = inputPassword.getText().toString().trim();
+
+                // Check for empty data in the form
+                if (!email.isEmpty() && !password.isEmpty()) {
+                    // login user
+                    checkLogin(email, password);
+                } else {
+                    // Prompt user to enter credentials
+                    Toast.makeText(getApplicationContext(),
+                            "Please enter the credentials!", Toast.LENGTH_LONG)
+                            .show();
                 }
+            }
 
-                // Login button Click Event
-                btnLogin.setOnClickListener(new View.OnClickListener() {
+        });
 
-                    public void onClick(View view) {
-                        String email = inputEmail.getText().toString().trim();
-                        String password = inputPassword.getText().toString().trim();
+        // Link to Register Screen
+        btnLinkToRegister.setOnClickListener(new View.OnClickListener() {
 
-                        // Check for empty data in the form
-                        if (!email.isEmpty() && !password.isEmpty()) {
-                            // login user
-                            checkLogin(email, password);
-                        } else {
-                            // Prompt user to enter credentials
-                            Toast.makeText(getApplicationContext(),
-                                    "Please enter the credentials!", Toast.LENGTH_LONG)
-                                    .show();
-                        }
-                                }
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(), Sign_up.class);
+                startActivity(i);
+                finish();
+            }
+        });
 
-                            });
-
-                    // Link to Register Screen
-                    btnLinkToRegister.setOnClickListener(new View.OnClickListener() {
-
-                        public void onClick(View view) {
-                            Intent i = new Intent(getApplicationContext(),
-                                    Sign_up.class);
-                            startActivity(i);
-                            finish();
-                        }
-                    });
-
-                }
+    }
 
     /**
      * function to verify login details in mysql db
-     * */
+     */
     private void checkLogin(final String email, final String password) {
         // Tag used to cancel the request
         String tag_string_req = "req_login";

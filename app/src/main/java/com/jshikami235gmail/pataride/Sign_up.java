@@ -29,37 +29,29 @@ import java.util.Map;
 public class Sign_up extends AppCompatActivity {
 
     private static final String TAG = Sign_up.class.getSimpleName();
-    private Button btnSignup;
-    private Button btnLinkToLogin;
     private EditText inputFullName;
     private EditText inputEmail;
     private EditText inputPassword;
     private ProgressDialog pDialog;
-    private SessionManager session;
     private SQLiteHandler db;
-
 
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up);
-        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
-        setSupportActionBar(toolbar);
-        setTitle("PataRide");
 
-
-        final EditText inputFullName = (EditText) findViewById(R.id.etfname);
+        inputFullName = (EditText) findViewById(R.id.etfname);
         inputEmail = (EditText) findViewById(R.id.etEmail);
         inputPassword = (EditText) findViewById(R.id.etPassword);
-        btnSignup = (Button) findViewById(R.id.btn_signUp);
-        btnLinkToLogin = (Button) findViewById(R.id.btnLinkToLoginScreen);
+        Button btnRegister = (Button) findViewById(R.id.btn_signUp);
+        Button btnLinkToLogin = (Button) findViewById(R.id.btnLinkToLoginScreen);
 
         // Progress dialog
         pDialog = new ProgressDialog(this);
         pDialog.setCancelable(false);
 
         // Session manager
-        session = new SessionManager(getApplicationContext());
+        SessionManager session = new SessionManager(getApplicationContext());
 
         // SQLite database handler
         db = new SQLiteHandler(getApplicationContext());
@@ -74,13 +66,13 @@ public class Sign_up extends AppCompatActivity {
         }
 
         // Register Button Click event
-        btnLinkToLogin.setOnClickListener(new View.OnClickListener() {
+        btnRegister.setOnClickListener(new View.OnClickListener() {
             public void onClick(View view) {
                 String name = inputFullName.getText().toString().trim();
                 String email = inputEmail.getText().toString().trim();
                 String password = inputPassword.getText().toString().trim();
 
-                if (!name.isEmpty() && !email.isEmpty() && !password.isEmpty()) {
+                if (!name.isEmpty()  && !email.isEmpty() && !password.isEmpty()) {
                     registerUser(name, email, password);
                 } else {
                     Toast.makeText(getApplicationContext(),
@@ -95,7 +87,7 @@ public class Sign_up extends AppCompatActivity {
 
             public void onClick(View view) {
                 Intent i = new Intent(getApplicationContext(),
-                       login.class);
+                        login.class);
                 startActivity(i);
                 finish();
             }
@@ -106,9 +98,8 @@ public class Sign_up extends AppCompatActivity {
     /**
      * Function to store user in MySQL database will post params(tag, name,
      * email, password) to register url
-     * */
-    private void registerUser(final String name, final String email,
-                              final String password) {
+     */
+    private void registerUser(final String name, final String email, final String password) {
         // Tag used to cancel the request
         String tag_string_req = "req_register";
 
@@ -120,7 +111,7 @@ public class Sign_up extends AppCompatActivity {
 
             @Override
             public void onResponse(String response) {
-                Log.d(TAG, "Register Response: " + response.toString());
+                Log.d(TAG, "Register Response: " + response);
                 hideDialog();
 
                 try {
@@ -134,8 +125,7 @@ public class Sign_up extends AppCompatActivity {
                         JSONObject user = jObj.getJSONObject("user");
                         String name = user.getString("name");
                         String email = user.getString("email");
-                        String created_at = user
-                                .getString("created_at");
+                        String created_at = user.getString("created_at");
 
                         // Inserting row in users table
                         db.addUser(name, email, uid, created_at);
@@ -145,7 +135,7 @@ public class Sign_up extends AppCompatActivity {
                         // Launch login activity
                         Intent intent = new Intent(
                                 Sign_up.this,
-                               login.class);
+                                login.class);
                         startActivity(intent);
                         finish();
                     } else {
@@ -175,7 +165,7 @@ public class Sign_up extends AppCompatActivity {
             @Override
             protected Map<String, String> getParams() {
                 // Posting params to register url
-                Map<String, String> params = new HashMap<String, String>();
+                Map<String, String> params = new HashMap<>();
                 params.put("name", name);
                 params.put("email", email);
                 params.put("password", password);
@@ -198,5 +188,6 @@ public class Sign_up extends AppCompatActivity {
         if (pDialog.isShowing())
             pDialog.dismiss();
     }
+
 }
 
