@@ -1,5 +1,6 @@
 package com.jshikami235gmail.pataride;
 
+import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
@@ -10,158 +11,192 @@ import android.widget.Button;
 import android.widget.EditText;
 import android.widget.Toast;
 
-import com.android.volley.AuthFailureError;
 import com.android.volley.Request;
-import com.android.volley.RequestQueue;
 import com.android.volley.Response;
-import com.android.volley.RetryPolicy;
 import com.android.volley.VolleyError;
 import com.android.volley.toolbox.StringRequest;
-import com.android.volley.toolbox.Volley;
+import com.jshikami235gmail.pataride.db.SQLiteHandler;
+import com.jshikami235gmail.pataride.utils.AppConfig;
 import com.jshikami235gmail.pataride.utils.SessionManager;
+
+import org.json.JSONException;
+import org.json.JSONObject;
 
 import java.util.HashMap;
 import java.util.Map;
 
-public class Sign_up extends AppCompatActivity implements View.OnClickListener{
-    EditText fname,lname,email,password;
-    Button btnSignin;
-    String url_SIGNUP = "http://10.0.2.2/pataride_api/sign_up.php";
-   //SQLiteHandler sqLiteHandler;
 
+public class Sign_up extends AppCompatActivity {
+
+    private static final String TAG = Sign_up.class.getSimpleName();
+    private Button btnSignup;
+    private Button btnLinkToLogin;
+    private EditText inputFullName;
+    private EditText inputEmail;
+    private EditText inputPassword;
+    private ProgressDialog pDialog;
     private SessionManager session;
+    private SQLiteHandler db;
+
 
     @Override
-    protected void onCreate(Bundle savedInstanceState) {
+    public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.sign_up);
-
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
-        setTitle("Sign up");
+        setTitle("PataRide");
 
-    //    sqliteHandler = new SQLiteHandler (this, null, null, 1);
 
-        fname = (EditText) findViewById(R.id.etfname);
-        lname = (EditText) findViewById(R.id.etlname);
-        password = (EditText) findViewById(R.id.etPassword);
-        email = (EditText) findViewById(R.id.etEmail);
+        final EditText inputFullName = (EditText) findViewById(R.id.etfname);
+        inputEmail = (EditText) findViewById(R.id.etEmail);
+        inputPassword = (EditText) findViewById(R.id.etPassword);
+        btnSignup = (Button) findViewById(R.id.btn_signUp);
+        btnLinkToLogin = (Button) findViewById(R.id.btnLinkToLoginScreen);
 
-        btnSignin = (Button) findViewById(R.id.btn_signUpAgain);
+        // Progress dialog
+        pDialog = new ProgressDialog(this);
+        pDialog.setCancelable(false);
 
+        // Session manager
+        session = new SessionManager(getApplicationContext());
+
+        // SQLite database handler
+        db = new SQLiteHandler(getApplicationContext());
+
+        // Check if user is already logged in or not
+        if (session.isLoggedIn()) {
+            // User is already logged in. Take him to main activity
+            Intent intent = new Intent(Sign_up.this,
+                    MapsActivity.class);
+            startActivity(intent);
+            finish();
+        }
+
+        // Register Button Click event
+        btnLinkToLogin.setOnClickListener(new View.OnClickListener() {
+            public void onClick(View view) {
+                String name = inputFullName.getText().toString().trim();
+                String email = inputEmail.getText().toString().trim();
+                String password = inputPassword.getText().toString().trim();
+
+                if (!name.isEmpty() && !email.isEmpty() && !password.isEmpty()) {
+                    registerUser(name, email, password);
+                } else {
+                    Toast.makeText(getApplicationContext(),
+                            "Please enter your details!", Toast.LENGTH_LONG)
+                            .show();
+                }
+            }
+        });
+
+        // Link to Login Screen
+        btnLinkToLogin.setOnClickListener(new View.OnClickListener() {
+
+            public void onClick(View view) {
+                Intent i = new Intent(getApplicationContext(),
+                       login.class);
+                startActivity(i);
+                finish();
+            }
+        });
 
     }
 
-    @Override
-    public void onClick(View v){
-            switch (v.getId()) {
-                case R.id.btn_signUpAgain:
-                    User user = new User();
-                    user.setFname(fname.getText().toString());
-                    user.setLname(lname.getText().toString());
-                    user.setPassword(password.getText().toString());
-                    user.setEmail(email.getText().toString());
+    /**
+     * Function to store user in MySQL database will post params(tag, name,
+     * email, password) to register url
+     * */
+    private void registerUser(final String name, final String email,
+                              final String password) {
+        // Tag used to cancel the request
+        String tag_string_req = "req_register";
 
-                    storeUser(user);
-                    Intent intent = new Intent(Sign_up.this, MapsActivity.class);
-                    startActivity(intent);
-                    finish();
+        pDialog.setMessage("Registering ...");
+        showDialog();
 
-            }
+        StringRequest strReq = new StringRequest(Request.Method.POST,
+                AppConfig.URL_SIGNUP, new Response.Listener<String>() {
 
-            // Session manager
-            session = new SessionManager(getApplicationContext());
-
-            // Check if user is already logged in or not
-            if (session.isLoggedIn()) {
-                // User is already logged in. Take him to main activity
-                Intent intent = new Intent(Sign_up.this,
-                        MapsActivity.class);
-                startActivity(intent);
-                finish();
-
-            }
-
-        if (fname.getText().toString().trim().equals("") ||
-              lname.getText().toString().trim().equals("") ||
-                email.getText().toString().trim().equals("") ||
-                 password.getText().toString().trim().equals("")) {
-            Toast.makeText(getApplication(), ("Please make sure you entered all fields correctly."), Toast.LENGTH_LONG).show();
-        } else {
-
-            // Instantiate the RequestQueue.
-            RequestQueue queue = Volley.newRequestQueue(Sign_up.this);
-             String url = "http://192.168.44.40/pataride_api/sign_up.php";
-               // Request a string response from the provided URL.
-               StringRequest stringRequest = new StringRequest(Request.Method.POST, url,
-                    new Response.Listener<String>() {
-
-                        @Override
-                        public void onResponse(String response) {
-                             // Display the first 500 characters of the response string.
-                            Toast.makeText(getApplication(), ("Response string: " + response.substring(0, 500)), Toast.LENGTH_LONG).show();
-
-                        }
-                        },
-                        new Response.ErrorListener() {
-
-                        @Override
-                        public void onErrorResponse(VolleyError error) {
-                            Log.e("TAG", error.toString());
-                        }
-                    });
-
-             }
-
-        }
-
-
-        public void storeUser(final User user){
-            RequestQueue queue = Volley.newRequestQueue(this);
-
-            final StringRequest request = new StringRequest(Request.Method.POST, url_SIGNUP, new Response.Listener<String>() {
             @Override
             public void onResponse(String response) {
-                Log.d("Response",response.toString());
+                Log.d(TAG, "Register Response: " + response.toString());
+                hideDialog();
+
+                try {
+                    JSONObject jObj = new JSONObject(response);
+                    boolean error = jObj.getBoolean("error");
+                    if (!error) {
+                        // User successfully stored in MySQL
+                        // Now store the user in sqlite
+                        String uid = jObj.getString("uid");
+
+                        JSONObject user = jObj.getJSONObject("user");
+                        String name = user.getString("name");
+                        String email = user.getString("email");
+                        String created_at = user
+                                .getString("created_at");
+
+                        // Inserting row in users table
+                        db.addUser(name, email, uid, created_at);
+
+                        Toast.makeText(getApplicationContext(), "User successfully registered. Try login now!", Toast.LENGTH_LONG).show();
+
+                        // Launch login activity
+                        Intent intent = new Intent(
+                                Sign_up.this,
+                               login.class);
+                        startActivity(intent);
+                        finish();
+                    } else {
+
+                        // Error occurred in registration. Get the error
+                        // message
+                        String errorMsg = jObj.getString("error_msg");
+                        Toast.makeText(getApplicationContext(),
+                                errorMsg, Toast.LENGTH_LONG).show();
+                    }
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                }
 
             }
         }, new Response.ErrorListener() {
+
             @Override
             public void onErrorResponse(VolleyError error) {
-                Log.d("Error",error.toString());
-
-
+                Log.e(TAG, "Registration Error: " + error.getMessage());
+                Toast.makeText(getApplicationContext(),
+                        error.getMessage(), Toast.LENGTH_LONG).show();
+                hideDialog();
             }
-        }){
+        }) {
+
             @Override
-            protected Map<String, String> getParams() throws AuthFailureError {
-                Map<String,String> postParams = new HashMap<String,String>();
-                postParams.put("first_name",user.getFname());
-                postParams.put("second_name",user.getLname());
-                postParams.put("email",user.getEmail());
-                postParams.put("password",user.getPassword());
-                return postParams;
+            protected Map<String, String> getParams() {
+                // Posting params to register url
+                Map<String, String> params = new HashMap<String, String>();
+                params.put("name", name);
+                params.put("email", email);
+                params.put("password", password);
+
+                return params;
             }
+
         };
-        request.setRetryPolicy(new RetryPolicy() {
-            @Override
-            public int getCurrentTimeout() {
-                return 5000;
-            }
 
-            @Override
-            public int getCurrentRetryCount() {
-                return 5000;
-            }
-
-            @Override
-            public void retry(VolleyError error) throws VolleyError {
-
-            }
-        });
-        queue.add(request);
+        // Adding request to request queue
+        AppController.getInstance().addToRequestQueue(strReq, tag_string_req);
     }
 
+    private void showDialog() {
+        if (!pDialog.isShowing())
+            pDialog.show();
+    }
 
+    private void hideDialog() {
+        if (pDialog.isShowing())
+            pDialog.dismiss();
+    }
 }
 

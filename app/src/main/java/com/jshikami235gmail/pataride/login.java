@@ -4,6 +4,7 @@ import android.app.ProgressDialog;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.util.Log;
 import android.view.View;
 import android.widget.Button;
@@ -26,7 +27,9 @@ import java.util.Map;
 
 public class login extends AppCompatActivity {
 
-    private static final String TAG = login.class.getSimpleName();
+    private static final String TAG = Sign_up.class.getSimpleName();
+    private Button btnLogin;
+    private Button btnLinkToRegister;
     private EditText inputEmail;
     private EditText inputPassword;
     private ProgressDialog pDialog;
@@ -37,66 +40,71 @@ public class login extends AppCompatActivity {
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
+        Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        setTitle("PataRide");
 
-        inputEmail = (EditText) findViewById(R.id.email_l);
-        inputPassword = (EditText) findViewById(R.id.pwd_l);
-        Button btnLogin = (Button) findViewById(R.id.btn_signIn);
-        Button btnLinkToRegister = (Button) findViewById(R.id.btnLinkToSignInScreen);
 
-        // Progress dialog
-        pDialog = new ProgressDialog(this);
-        pDialog.setCancelable(false);
+            inputEmail = (EditText) findViewById(R.id.email_l);
+            inputPassword = (EditText) findViewById(R.id.pwd_l);
+            btnLogin = (Button) findViewById(R.id.btn_signIn);
+            btnLinkToRegister = (Button) findViewById(R.id.btnLinkToSignInScreen);
 
-        // SQLite database handler
-        db = new SQLiteHandler(getApplicationContext());
+            // Progress dialog
+            pDialog = new ProgressDialog(this);
+            pDialog.setCancelable(false);
 
-        // Session manager
-        session = new SessionManager(getApplicationContext());
+            // SQLite database handler
+            db = new SQLiteHandler(getApplicationContext());
 
-        // Check if user is already logged in or not
-        if (session.isLoggedIn()) {
-            // User is already logged in. Take him to main activity
-            Intent intent = new Intent(login.this, MapsActivity.class);
-            startActivity(intent);
-            finish();
-        }
+            // Session manager
+            session = new SessionManager(getApplicationContext());
 
-        // Login button Click Event
-        btnLogin.setOnClickListener(new View.OnClickListener() {
-
-            public void onClick(View view) {
-                String email = inputEmail.getText().toString().trim();
-                String password = inputPassword.getText().toString().trim();
-
-                // Check for empty data in the form
-                if (!email.isEmpty() && !password.isEmpty()) {
-                    // login user
-                    checkLogin(email, password);
-                } else {
-                    // Prompt user to enter credentials
-                    Toast.makeText(getApplicationContext(),
-                            "Please enter the credentials!", Toast.LENGTH_LONG)
-                            .show();
+                // Check if user is already logged in or not
+                if (session.isLoggedIn()) {
+                    // User is already logged in. Take him to main activity
+                    Intent intent = new Intent(login.this, MapsActivity.class);
+                    startActivity(intent);
+                    finish();
                 }
-            }
 
-        });
+                // Login button Click Event
+                btnLogin.setOnClickListener(new View.OnClickListener() {
 
-        // Link to Register Screen
-       btnLinkToRegister.setOnClickListener(new View.OnClickListener() {
+                    public void onClick(View view) {
+                        String email = inputEmail.getText().toString().trim();
+                        String password = inputPassword.getText().toString().trim();
 
-           public void onClick(View view) {
-               Intent i = new Intent(getApplicationContext(), Sign_up.class);
-               startActivity(i);
-               finish();
-           }
-       });
+                        // Check for empty data in the form
+                        if (!email.isEmpty() && !password.isEmpty()) {
+                            // login user
+                            checkLogin(email, password);
+                        } else {
+                            // Prompt user to enter credentials
+                            Toast.makeText(getApplicationContext(),
+                                    "Please enter the credentials!", Toast.LENGTH_LONG)
+                                    .show();
+                        }
+                                }
 
-    }
+                            });
+
+                    // Link to Register Screen
+                    btnLinkToRegister.setOnClickListener(new View.OnClickListener() {
+
+                        public void onClick(View view) {
+                            Intent i = new Intent(getApplicationContext(),
+                                    Sign_up.class);
+                            startActivity(i);
+                            finish();
+                        }
+                    });
+
+                }
 
     /**
      * function to verify login details in mysql db
-     */
+     * */
     private void checkLogin(final String email, final String password) {
         // Tag used to cancel the request
         String tag_string_req = "req_login";
@@ -126,14 +134,13 @@ public class login extends AppCompatActivity {
                         String uid = jObj.getString("uid");
 
                         JSONObject user = jObj.getJSONObject("user");
-                        String first_name = user.getString("first name");
-                        String second_name = user.getString("second name");
+                        String name = user.getString("name");
                         String email = user.getString("email");
                         String created_at = user
                                 .getString("created_at");
 
                         // Inserting row in users table
-                       db.addUser(first_name, second_name, email, uid, created_at);
+                        db.addUser(name, email, uid, created_at);
 
                         // Launch main activity
                         Intent intent = new Intent(login.this,
@@ -190,4 +197,3 @@ public class login extends AppCompatActivity {
             pDialog.dismiss();
     }
 }
-

@@ -18,31 +18,17 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:id="@+id/etfname"
-        android:hint="@string/first_et"
-        android:textColor="#6c6c6c"
-        android:layout_marginTop="65dp"
-        android:inputType="textPersonName"
-        android:layout_marginLeft="50dp"
-        android:layout_alignParentTop="true"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:paddingRight="150dp" />
-
-
-    <EditText
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:id="@+id/etlname"
-        android:hint="Second Name"
+        android:hint="Full Name"
         android:layout_marginTop="50dp"
-        android:layout_below="@+id/etfname"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="15dp"
+        android:layout_marginLeft="30dp"
+        android:layout_marginRight="50dp"
         android:textColor="#6c6c6c"
         android:inputType="textPersonName"
-        android:layout_alignRight="@+id/etfname"
-        android:layout_alignEnd="@+id/etfname"
-        android:layout_alignLeft="@+id/etfname"
-        android:layout_alignStart="@+id/etfname" />
+        android:layout_alignParentRight="true"
+        android:layout_alignParentEnd="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
 
     <EditText
         android:layout_width="wrap_content"
@@ -51,13 +37,13 @@
         android:textColor="#6c6c6c"
         android:inputType="textEmailAddress"
         android:hint="@string/email_et"
-        android:layout_below="@+id/etlname"
+        android:layout_below="@+id/etfname"
         android:layout_marginTop="50dp"
-        android:layout_marginBottom="20dp"
+        android:layout_marginBottom="15dp"
+        android:layout_alignLeft="@+id/etfname"
+        android:layout_alignStart="@+id/etfname"
         android:layout_alignRight="@+id/etfname"
-        android:layout_alignEnd="@+id/etfname"
-        android:layout_alignLeft="@+id/etlname"
-        android:layout_alignStart="@+id/etlname" />
+        android:layout_alignEnd="@+id/etfname" />
 
 
     <EditText
@@ -70,26 +56,38 @@
         android:layout_marginTop="50dp"
         android:id="@+id/etPassword"
         android:layout_below="@+id/etEmail"
-        android:layout_marginBottom="20dp"
-        android:layout_alignRight="@+id/etfname"
-        android:layout_alignEnd="@+id/etfname"
+        android:layout_marginBottom="15dp"
         android:layout_alignLeft="@+id/etEmail"
-        android:layout_alignStart="@+id/etEmail" />
+        android:layout_alignStart="@+id/etEmail"
+        android:layout_alignRight="@+id/etEmail"
+        android:layout_alignEnd="@+id/etEmail" />
 
     <Button
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:layout_below="@+id/etPassword"
         android:background="#d15351"
+        android:layout_marginRight="50dp"
         android:text="Sign up"
         android:textColor="#fff"
-        android:id="@+id/btn_signUpAgain"
-        android:layout_alignRight="@+id/etfname"
-        android:layout_alignEnd="@+id/etfname"
+        android:id="@+id/btn_signUp"
         android:layout_marginBottom="100dp"
-        android:layout_alignLeft="@+id/etPassword"
-        android:layout_alignStart="@+id/etPassword"
         android:clickable="true"
-        android:onClick="onClick" />
+        android:layout_alignLeft="@+id/etPassword"
+        android:layout_alignStart="@+id/etPassword" />
+
+    <Button
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:background="#f2f2f2"
+        android:text="Login"
+        android:id="@+id/btnLinkToLoginScreen"
+        android:textColor="#6c6c6c"
+        android:layout_alignTop="@+id/btn_signUp"
+        android:layout_alignLeft="@+id/btn_signUp"
+        android:layout_alignStart="@+id/btn_signUp"
+        android:layout_marginTop="59dp"
+        android:layout_alignRight="@+id/btn_signUp"
+        android:layout_alignEnd="@+id/btn_signUp" />
 </RelativeLayout>
     </ScrollView>
